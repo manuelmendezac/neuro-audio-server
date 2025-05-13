@@ -1,12 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
-
-dotenv.config();
+const express = require('express');
+const cors = require('cors');
+const fetch = require('node-fetch');
+require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const VOICE_ID = 'QjgzRSmNzhwPwD4h6c9j';
 const XI_API_KEY = process.env.XI_API_KEY;
 
@@ -40,18 +38,4 @@ app.post('/api/generarAudio', async (req, res) => {
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      return res.status(500).json({ error: error.detail || 'Error generando audio' });
-    }
-
-    res.setHeader('Content-Type', 'audio/mpeg');
-    res.setHeader('Content-Disposition', 'inline; filename="bienvenida.mp3"');
-    response.body.pipe(res);
-  } catch (err) {
-    res.status(500).json({ error: 'Error conectando con ElevenLabs' });
-  }
-});
-
-app.listen(PORT, () => {
-  console.log(`Servidor Express escuchando en http://localhost:${PORT}`);
-});
+      const error =
