@@ -1,18 +1,21 @@
-const express = require('express');
-const cors = require('cors');
-const fetch = require('node-fetch');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const VOICE_ID = 'QjgzRSmNzhwPwD4h6c9j';
-const XI_API_KEY = process.env.XI_API_KEY || 'sk_7c706867b72b354e3588c31a32ce395887dbcb9947694470';
+const XI_API_KEY = process.env.XI_API_KEY;
 
 app.use(cors());
 app.use(express.json());
 
 app.post('/api/generarAudio', async (req, res) => {
   const { nombre } = req.body;
+
   if (!nombre || typeof nombre !== 'string') {
     return res.status(400).json({ error: 'El campo nombre es requerido' });
   }
@@ -51,4 +54,4 @@ app.post('/api/generarAudio', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Servidor Express escuchando en http://localhost:${PORT}`);
-}); 
+});
