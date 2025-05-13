@@ -38,4 +38,20 @@ app.post('/api/generarAudio', async (req, res) => {
     });
 
     if (!response.ok) {
-      const error =
+      const error = await response.json();
+      return res.status(500).json({ error: error.detail || 'Error generando audio' });
+    }
+
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Content-Disposition', 'inline; filename="bienvenida.mp3"');
+    response.body.pipe(res);
+
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({ error: 'Error conectando con ElevenLabs' });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor Express escuchando en http://localhost:${PORT}`);
+});
