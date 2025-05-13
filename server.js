@@ -18,7 +18,10 @@ app.post('/api/generarAudio', async (req, res) => {
     return res.status(400).json({ error: 'El campo nombre es requerido' });
   }
 
-  const texto = `Hola ${nombre}, soy tu clon IA. Bienvenido a tu portal de inteligencia aumentada.`;
+  const texto = `Bienvenido, ${nombre} AI. Hoy es un gran día para crear lo imposible. ${new Date().toLocaleDateString('es-ES', {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+})}. Bienvenido a tu portal de inteligencia aumentada. Explora tu Segundo Cerebro. Personaliza tu clon en el Centro de Entrenamiento. Activa el modo Focus. Conecta tu clon fuera de la plataforma. Consulta tu Dashboard. ¡Estás listo para comenzar!`;
+
 
   try {
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${VOICE_ID}/stream`, {
