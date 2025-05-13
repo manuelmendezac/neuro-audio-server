@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const VOICE_ID = 'QjgzRSmNzhwPwD4h6c9j';
+const VOICE_ID = 'aAtR3uAVlEaQIWGd9EDO';
 const XI_API_KEY = process.env.XI_API_KEY;
 
 app.use(cors());
